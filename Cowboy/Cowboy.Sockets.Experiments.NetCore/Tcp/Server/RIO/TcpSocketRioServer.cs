@@ -200,7 +200,7 @@ namespace Cowboy.Sockets.Experimental
 
             if (_sessions.TryAdd(session.SessionKey, session))
             {
-                Log.DebugFormat("New session [{0}].", session);
+                Log?.DebugFormat("New session [{0}].", session);
                 try
                 {
                     await session.Start();
@@ -210,7 +210,7 @@ namespace Cowboy.Sockets.Experimental
                     TcpSocketRioSession recycle;
                     if (_sessions.TryRemove(session.SessionKey, out recycle))
                     {
-                        Log.DebugFormat("Close session [{0}].", recycle);
+                        Log?.DebugFormat("Close session [{0}].", recycle);
                     }
                 }
             }
@@ -234,7 +234,7 @@ namespace Cowboy.Sockets.Experimental
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", sessionKey);
+                Log?.WarnFormat("Cannot find session [{0}].", sessionKey);
             }
         }
 
@@ -252,7 +252,7 @@ namespace Cowboy.Sockets.Experimental
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", session);
+                Log?.WarnFormat("Cannot find session [{0}].", session);
             }
         }
 
@@ -316,7 +316,7 @@ namespace Cowboy.Sockets.Experimental
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.Message, ex);
+                    Log?.Error(ex.Message, ex);
                 }
             }
         }

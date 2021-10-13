@@ -160,7 +160,7 @@ namespace Cowboy.Sockets
             }
             catch (Exception ex) // catch exceptions then log then re-throw
             {
-                Log.Error(ex.Message, ex);
+                Log?.Error(ex.Message, ex);
                 Close(true); // handle tcp connection error occurred
                 throw;
             }
@@ -279,7 +279,7 @@ namespace Cowboy.Sockets
                     if (_configuration.SslPolicyErrorsBypassed)
                         return true;
                     else
-                        Log.ErrorFormat("Session [{0}] error occurred when validating remote certificate: [{1}], [{2}].",
+                        Log?.ErrorFormat("Session [{0}] error occurred when validating remote certificate: [{1}], [{2}].",
                             this, this.RemoteEndPoint, sslPolicyErrors);
 
                     return false;
@@ -318,7 +318,7 @@ namespace Cowboy.Sockets
             // When authentication succeeds, you must check the IsEncrypted and IsSigned properties
             // to determine what security services are used by the SslStream.
             // Check the IsMutuallyAuthenticated property to determine whether mutual authentication occurred.
-            Log.DebugFormat(
+            Log?.DebugFormat(
                 "Ssl Stream: SslProtocol[{0}], IsServer[{1}], IsAuthenticated[{2}], IsEncrypted[{3}], IsSigned[{4}], IsMutuallyAuthenticated[{5}], "
                 + "HashAlgorithm[{6}], HashStrength[{7}], KeyExchangeAlgorithm[{8}], KeyExchangeStrength[{9}], CipherAlgorithm[{10}], CipherStrength[{11}].",
                 sslStream.SslProtocol,
@@ -401,7 +401,7 @@ namespace Cowboy.Sockets
                 }
                 catch (Exception innnerException)
                 {
-                    Log.Error(innnerException.Message, innnerException);
+                    Log?.Error(innnerException.Message, innnerException);
                 }
             }
         }
@@ -516,7 +516,7 @@ namespace Cowboy.Sockets
                 )
             {
                 if (ex is SocketException)
-                    Log.Error(string.Format("Session [{0}] exception occurred, [{1}].", this, ex.Message), ex);
+                    Log?.Error(string.Format("Session [{0}] exception occurred, [{1}].", this, ex.Message), ex);
 
                 Close(true); // catch specified exception then intend to close the session
 
@@ -528,7 +528,7 @@ namespace Cowboy.Sockets
 
         private void HandleUserSideError(Exception ex)
         {
-            Log.Error(string.Format("Session [{0}] error occurred in user side [{1}].", this, ex.Message), ex);
+            Log?.Error(string.Format("Session [{0}] error occurred in user side [{1}].", this, ex.Message), ex);
         }
 
         #endregion
@@ -618,7 +618,7 @@ namespace Cowboy.Sockets
                 }
                 catch (Exception innnerException)
                 {
-                    Log.Error(innnerException.Message, innnerException);
+                    Log?.Error(innnerException.Message, innnerException);
                 }
             }
         }

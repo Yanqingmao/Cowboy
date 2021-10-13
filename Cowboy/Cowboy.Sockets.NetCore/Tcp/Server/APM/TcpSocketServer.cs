@@ -100,7 +100,7 @@ namespace Cowboy.Sockets
                 {
                     if (!ShouldThrow(ex))
                     {
-                        Log.Error(ex.Message, ex);
+                        Log?.Error(ex.Message, ex);
                     }
                     else throw;
                 }
@@ -135,7 +135,7 @@ namespace Cowboy.Sockets
             {
                 if (!ShouldThrow(ex))
                 {
-                    Log.Error(ex.Message, ex);
+                    Log?.Error(ex.Message, ex);
                 }
                 else throw;
             }
@@ -164,7 +164,7 @@ namespace Cowboy.Sockets
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.Message, ex);
+                    Log?.Error(ex.Message, ex);
                 }
 
                 if (isSessionStarted)
@@ -180,7 +180,7 @@ namespace Cowboy.Sockets
             {
                 if (!ShouldThrow(ex))
                 {
-                    Log.Error(ex.Message, ex);
+                    Log?.Error(ex.Message, ex);
                 }
                 else throw;
             }
@@ -249,7 +249,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", sessionKey);
+                Log?.WarnFormat("Cannot find session [{0}].", sessionKey);
             }
         }
 
@@ -283,7 +283,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", session);
+                Log?.WarnFormat("Cannot find session [{0}].", session);
             }
         }
 
@@ -317,7 +317,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", sessionKey);
+                Log?.WarnFormat("Cannot find session [{0}].", sessionKey);
             }
         }
 
@@ -351,7 +351,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", session);
+                Log?.WarnFormat("Cannot find session [{0}].", session);
             }
         }
 
@@ -380,7 +380,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", sessionKey);
+                Log?.WarnFormat("Cannot find session [{0}].", sessionKey);
             }
 
             return null;
@@ -416,7 +416,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", session);
+                Log?.WarnFormat("Cannot find session [{0}].", session);
             }
 
             return null;
@@ -581,7 +581,7 @@ namespace Cowboy.Sockets
 
         private void HandleUserSideError(TcpSocketSession session, Exception ex)
         {
-            Log.Error(string.Format("Session [{0}] error occurred in user side [{1}].", session, ex.Message), ex);
+            Log?.Error(string.Format("Session [{0}] error occurred in user side [{1}].", session, ex.Message), ex);
         }
 
         #endregion

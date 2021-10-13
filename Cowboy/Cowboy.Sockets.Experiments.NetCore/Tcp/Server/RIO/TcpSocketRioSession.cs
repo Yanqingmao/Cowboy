@@ -135,7 +135,7 @@ namespace Cowboy.Sockets.Experimental
                     throw new ObjectDisposedException("This tcp socket session has been disposed after connected.");
                 }
 
-                Log.DebugFormat("Session started on [{0}] in dispatcher [{1}] with session count [{2}].",
+                Log?.DebugFormat("Session started on [{0}] in dispatcher [{1}] with session count [{2}].",
                     this.StartTime.ToString(@"yyyy-MM-dd HH:mm:ss.fffffff"),
                     _dispatcher.GetType().Name,
                     this.Server.SessionCount);
@@ -161,7 +161,7 @@ namespace Cowboy.Sockets.Experimental
             }
             catch (Exception ex) // catch exceptions then log then re-throw
             {
-                Log.Error(string.Format("Session [{0}] exception occurred, [{1}].", this, ex.Message), ex);
+                Log?.Error(string.Format("Session [{0}] exception occurred, [{1}].", this, ex.Message), ex);
                 await Close(); // handle tcp connection error occurred
                 throw;
             }
@@ -249,7 +249,7 @@ namespace Cowboy.Sockets.Experimental
                 return;
             }
 
-            Log.DebugFormat("Session closed on [{0}] in dispatcher [{1}] with session count [{2}].",
+            Log?.DebugFormat("Session closed on [{0}] in dispatcher [{1}] with session count [{2}].",
                 DateTime.UtcNow.ToString(@"yyyy-MM-dd HH:mm:ss.fffffff"),
                 _dispatcher.GetType().Name,
                 this.Server.SessionCount - 1);
@@ -345,7 +345,7 @@ namespace Cowboy.Sockets.Experimental
                 || ex is ArgumentException      // buffer array operation
                 )
             {
-                Log.Error(ex.Message, ex);
+                Log?.Error(ex.Message, ex);
 
                 await Close(); // catch specified exception then intend to close the session
 
@@ -357,7 +357,7 @@ namespace Cowboy.Sockets.Experimental
 
         private async Task HandleUserSideError(Exception ex)
         {
-            Log.Error(string.Format("Session [{0}] error occurred in user side [{1}].", this, ex.Message), ex);
+            Log?.Error(string.Format("Session [{0}] error occurred in user side [{1}].", this, ex.Message), ex);
             await Task.CompletedTask;
         }
 
@@ -415,7 +415,7 @@ namespace Cowboy.Sockets.Experimental
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.Message, ex);
+                    Log?.Error(ex.Message, ex);
                 }
             }
         }

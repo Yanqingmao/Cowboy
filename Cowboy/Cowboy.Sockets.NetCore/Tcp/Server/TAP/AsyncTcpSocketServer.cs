@@ -191,7 +191,7 @@ namespace Cowboy.Sockets
             catch (Exception ex) when (!ShouldThrow(ex)) { }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                Log?.Error(ex.Message, ex);
             }
         }
 
@@ -201,21 +201,21 @@ namespace Cowboy.Sockets
 
             if (_sessions.TryAdd(session.SessionKey, session))
             {
-                Log.DebugFormat("New session [{0}].", session);
+                Log?.DebugFormat("New session [{0}].", session);
                 try
                 {
                     await session.Start();
                 }
                 catch (TimeoutException ex)
                 {
-                    Log.Error(ex.Message, ex);
+                    Log?.Error(ex.Message, ex);
                 }
                 finally
                 {
                     AsyncTcpSocketSession throwAway;
                     if (_sessions.TryRemove(session.SessionKey, out throwAway))
                     {
-                        Log.DebugFormat("Close session [{0}].", throwAway);
+                        Log?.DebugFormat("Close session [{0}].", throwAway);
                     }
                 }
             }
@@ -251,7 +251,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", sessionKey);
+                Log?.WarnFormat("Cannot find session [{0}].", sessionKey);
             }
         }
 
@@ -269,7 +269,7 @@ namespace Cowboy.Sockets
             }
             else
             {
-                Log.WarnFormat("Cannot find session [{0}].", session);
+                Log?.WarnFormat("Cannot find session [{0}].", session);
             }
         }
 
